@@ -93,7 +93,7 @@ La base de l'URL pour accéder à l'API est la suivante : `http://localhost/arvb
 
 ## Conclusion
 
-Ce projet est un fork du projet disponible sur [NouvelleTechno/api-rest](https://github.com/NouvelleTechno/api-rest). Pour plus d'informations et pour contribuer, n'hésitez pas à visiter le dépôt GitHub officiel.
+Ce projet est une copie du projet disponible sur [NouvelleTechno/api-rest](https://github.com/NouvelleTechno/api-rest). Pour plus d'informations et pour contribuer, n'hésitez pas à visiter le dépôt GitHub officiel.
 
 **Références :**
 
