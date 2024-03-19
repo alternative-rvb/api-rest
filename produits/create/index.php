@@ -9,8 +9,8 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // On vérifie la méthode
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     // On inclut les fichiers de configuration et d'accès aux données
-    include_once '../config/Database.php';
-    include_once '../models/Produits.php';
+    include_once '../../config/Database.php';
+    include_once '../../models/Produits.php';
 
     // On instancie la base de données
     $database = new Database();

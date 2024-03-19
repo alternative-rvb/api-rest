@@ -99,13 +99,20 @@ class Produits
         // on récupère la ligne
         $row = $query->fetch(PDO::FETCH_ASSOC);
 
-        // On hydrate l'objet
-        $this->nom = $row['nom'];
-        $this->prix = $row['prix'];
-        $this->description = $row['description'];
-        $this->categories_id = $row['categories_id'];
-        $this->categories_nom = $row['categories_nom'];
+        // Vérifier si un résultat a été trouvé
+        if ($row) {
+            // On hydrate l'objet avec les données trouvées
+            $this->nom = $row['nom'];
+            $this->prix = $row['prix'];
+            $this->description = $row['description'];
+            $this->categories_id = $row['categories_id'];
+            $this->categories_nom = $row['categories_nom'];
+        } else {
+            // Aucun produit trouvé avec cet ID, on peut définir `$this->nom` à null pour indiquer qu'aucun produit n'a été trouvé
+            $this->nom = null;
+        }
     }
+
 
     /**
      * Supprimer un produit
