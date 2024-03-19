@@ -1,25 +1,32 @@
 <?php
-class Database{
-    // Connexion à la base de données
-    private $host = "localhost";
-    private $db_name = "arvb_api_rest";
-    private $username = "root";
-    private $password = "";
+
+use Dotenv\Dotenv;
+
+require_once __DIR__ . '/../vendor/autoload.php'; // Assurez-vous que le chemin est correct
+
+class Database {
     public $connexion;
 
-    // getter pour la connexion
-    public function getConnection(){
-
+    public function getConnection() {
         $this->connexion = null;
 
-        try{
-            $this->connexion = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
+        // Charger les variables d'environnement
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+        $dotenv->load();
+
+        $host = $_ENV['DB_HOST'];
+        $db_name = $_ENV['DB_NAME'];
+        $username = $_ENV['DB_USER'];
+        $password = $_ENV['DB_PASS'];
+
+        try {
+            $this->connexion = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
             $this->connexion->exec("set names utf8");
             $this->connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }catch(PDOException $exception){
+        } catch (PDOException $exception) {
             echo "Erreur de connexion : " . $exception->getMessage();
         }
 
         return $this->connexion;
-    }   
+    }
 }

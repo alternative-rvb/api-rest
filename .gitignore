@@ -1,2 +1,29 @@
-.vscode/
+# Fichiers système générés par l'OS
+.DS_Store
+Thumbs.db
+
+# Dossier contenant les dépendances PHP
+/vendor/
+
+# Fichiers de configuration sensibles
+/.env
+
+# Fichiers de cache et logs
+*.log
+cache/
+*.tmp
+
+# Fichiers SQL autres que votre fichier de démo
+*.sql
+!api_rest_demo.sql
+
+# Dossiers et fichiers de configuration d'éditeur
+/.idea/
+/.vscode/
+
+# Dossiers spécifiques à d'autres outils de développement
+/node_modules/
+/.vagrant/
+
+# Fichiers spécifiques au projet qui ne doivent pas être partagés
 Notes.md

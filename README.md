@@ -1,4 +1,4 @@
-# Documentation API-REST (Beta)
+# Documentation API-REST
 
 Bienvenue dans la documentation de l'API-REST, une interface programmable en PHP conçue pour gérer des produits et des catégories de produits. Cette documentation est destinée à vous guider dans l'installation et l'utilisation de l'API, vous permettant d'interagir efficacement avec notre système de gestion.
 
@@ -6,16 +6,20 @@ Bienvenue dans la documentation de l'API-REST, une interface programmable en PHP
 
 Pour démarrer avec l'API-REST, suivez ces étapes d'installation :
 
-1. Accédez à phpMyAdmin et importez la base de données `api_rest.sql` disponible à la racine de notre projet. Cette base de données est à titre de démonstration et peut être modifiée selon vos besoins.
+1. **Base de Données** : Accédez à phpMyAdmin et importez la base de données `api_rest.sql` disponible à la racine de notre projet. Cette base de données est à titre de démonstration et peut être modifiée selon vos besoins.
 
-2. Configurez votre connexion à la base de données en modifiant le fichier `/config/Database.php` avec vos propres informations de connexion :
+2. **Configuration de la Base de Données** : Dupliquez le fichier `.env.example` à la racine de votre projet, renommez cette copie en `.env`, et remplissez-le avec vos propres informations de connexion à la base de données.
 
-    ```php
-    private $host = '<Votre_Host>';
-    private $db_name = '<Nom_De_Votre_Base_De_Données>';
-    private $username = '<Votre_Utilisateur>';
-    private $password = '<Votre_Mot_De_Passe>';
+    Exemple de contenu pour le fichier `.env` :
+
+    ```plaintext
+    DB_HOST=localhost
+    DB_NAME=nom_de_votre_base_de_données
+    DB_USER=votre_nom_d'utilisateur
+    DB_PASS=votre_mot_de_passe
     ```
+
+    Assurez-vous que le fichier `.env` n'est jamais inclus dans votre système de contrôle de version. Le fichier `.gitignore` devrait déjà être configuré pour exclure ce fichier.
 
 ## Utilisation
 
@@ -25,20 +29,32 @@ Pour interagir avec l'API, vous pouvez utiliser des outils de requêtes HTTP com
 
 #### URL de Base
 
-La base de l'URL pour accéder à l'API est la suivante : `http://localhost/api_rest/produits`
+La base de l'URL pour accéder à l'API est la suivante : `http://localhost/arvb-api-rest/produits/`
 
 #### Endpoints Disponibles
 
 - **Afficher tous les produits** :
-  `GET http://localhost/api_rest/produits/lire.php`
+
+  `GET http://localhost/arvb-api-rest/produits/`
 
 - **Afficher un produit spécifique** (en envoyant un ID) :
-  `GET http://localhost/api_rest/produits/lire_un.phplire_un{id}`
+
+  `GET http://localhost/arvb-api-rest/produits/single/`
+
+  Exemple de corps de requête pour afficher un produit :
+
+  ```json
+  {
+      "id": "5"
+  }
+  ```
 
 - **Ajouter un produit** :
-  `POST http://localhost/api_rest/produits/creer.php`
 
-  Exemple de corps de requête pour ajouter un produit :
+   `POST http://localhost/arvb-api-rest/produits/create/`
+  
+    Exemple de corps de requête pour ajouter un produit :
+
     ```json
     {
         "nom": "Produit1",
@@ -49,28 +65,31 @@ La base de l'URL pour accéder à l'API est la suivante : `http://localhost/api_
     ```
 
 - **Mettre à jour un produit** :
-  `PUT http://localhost/api_rest/produits/modifier.php`
 
-  Exemple de corps de requête pour mettre à jour un produit :
+    `PUT http://localhost/arvb-api-rest/produits/update/`
+  
+    Exemple de corps de requête pour mettre à jour un produit :
+
     ```json
     {
-        "id": "68",
-        "nom": "Produit1",
+        "id": "9",
+        "nom": "Produit9",
         "description": "Description mise à jour",
-        "prix": "55",
+        "prix": "99",
         "categories_id": 5
     }
     ```
 
 - **Supprimer un produit** (en envoyant un ID) :
-  `DELETE http://localhost/api_rest/produits/supprimer.php`
+
+  `DELETE http://localhost/arvb-api-rest/produits/delete/`
 
   Exemple de corps de requête pour supprimer un produit :
-    ```json
-    {
-        "id": 5
-    }
-    ```
+
+  ```json
+  {
+      "id": "5"
+  }
 
 ## Conclusion
 

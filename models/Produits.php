@@ -121,25 +121,28 @@ class Produits
      */
     public function supprimer()
     {
-        // On écrit la requête
+        // Vérification de l'existence du produit
+        $checkQuery = "SELECT id FROM " . $this->table . " WHERE id = ?";
+        $checkStmt = $this->connexion->prepare($checkQuery);
+        $checkStmt->bindParam(1, $this->id);
+        $checkStmt->execute();
+        if ($checkStmt->rowCount() == 0) {
+            // Le produit n'existe pas
+            return false;
+        }
+
+        // Le produit existe, procéder à la suppression
         $sql = "DELETE FROM " . $this->table . " WHERE id = ?";
-
-        // On prépare la requête
         $query = $this->connexion->prepare($sql);
-
-        // On sécurise les données
         $this->id = htmlspecialchars(strip_tags($this->id));
-
-        // On attache l'id
         $query->bindParam(1, $this->id);
 
-        // On exécute la requête
         if ($query->execute()) {
             return true;
         }
-
         return false;
     }
+
 
     /**
      * Mettre à jour un produit
@@ -148,27 +151,36 @@ class Produits
      */
     public function modifier()
     {
-        // On écrit la requête
+        // Vérifier d'abord si le produit existe
+        $sqlExist = "SELECT id FROM " . $this->table . " WHERE id = :id LIMIT 0,1";
+        $queryExist = $this->connexion->prepare($sqlExist);
+        $queryExist->bindParam(':id', $this->id);
+        $queryExist->execute();
+        if ($queryExist->rowCount() == 0) {
+            // Le produit spécifié par l'ID n'existe pas
+            return false;
+        }
+
+        // Si le produit existe, procéder à la mise à jour
         $sql = "UPDATE " . $this->table . " SET nom = :nom, prix = :prix, description = :description, categories_id = :categories_id WHERE id = :id";
 
-        // On prépare la requête
         $query = $this->connexion->prepare($sql);
 
-        // On sécurise les données
+        // Protection contre les injections
         $this->nom = htmlspecialchars(strip_tags($this->nom));
         $this->prix = htmlspecialchars(strip_tags($this->prix));
         $this->description = htmlspecialchars(strip_tags($this->description));
         $this->categories_id = htmlspecialchars(strip_tags($this->categories_id));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
-        // On attache les variables
+        // Liaison des variables
         $query->bindParam(':nom', $this->nom);
         $query->bindParam(':prix', $this->prix);
         $query->bindParam(':description', $this->description);
         $query->bindParam(':categories_id', $this->categories_id);
         $query->bindParam(':id', $this->id);
 
-        // On exécute
+        // Exécution de la requête
         if ($query->execute()) {
             return true;
         }
