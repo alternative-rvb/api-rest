@@ -25,18 +25,18 @@ Pour interagir avec l'API, vous pouvez utiliser des outils de requêtes HTTP com
 
 #### URL de Base
 
-La base de l'URL pour accéder à l'API est la suivante : `http://api-rest.test/`
+La base de l'URL pour accéder à l'API est la suivante : `http://localhost/api_rest/produits`
 
 #### Endpoints Disponibles
 
 - **Afficher tous les produits** :
-  `GET http://api-rest.test/produits/lire.php`
+  `GET http://localhost/api_rest/produits/lire.php`
 
 - **Afficher un produit spécifique** (en envoyant un ID) :
-  `GET http://api-rest.test/produits/lire_un.php?id={id}`
+  `GET http://localhost/api_rest/produits/lire_un.phplire_un{id}`
 
 - **Ajouter un produit** :
-  `POST http://api-rest.test/produits/creer.php`
+  `POST http://localhost/api_rest/produits/creer.php`
 
   Exemple de corps de requête pour ajouter un produit :
     ```json
@@ -49,7 +49,7 @@ La base de l'URL pour accéder à l'API est la suivante : `http://api-rest.test/
     ```
 
 - **Mettre à jour un produit** :
-  `PUT http://api-rest.test/produits/modifier.php`
+  `PUT http://localhost/api_rest/produits/modifier.php`
 
   Exemple de corps de requête pour mettre à jour un produit :
     ```json
@@ -63,7 +63,7 @@ La base de l'URL pour accéder à l'API est la suivante : `http://api-rest.test/
     ```
 
 - **Supprimer un produit** (en envoyant un ID) :
-  `DELETE http://api-rest.test/produits/supprimer.php`
+  `DELETE http://localhost/api_rest/produits/supprimer.php`
 
   Exemple de corps de requête pour supprimer un produit :
     ```json
